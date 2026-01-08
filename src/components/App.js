@@ -7,24 +7,27 @@ import Child from "./Child";
 const App = () => {
 
   function handleComplete(index){
-    const filteredTodo = todos.filter((todoItem, key)=>{
-      return key === index;
+    const filteredTodo = todos.map((todoItem, key)=>{
+      if(key == index){
+        todoItem.status= true;
+      }
+      return todoItem
     })
-    filteredTodo.status =true;
-    setTodos(todos, filteredTodo)
+    setTodos(filteredTodo)
   }
 
   const [todos, setTodos] = useState([
-    {'content':'eat','status':'false'},
-    {'content':'walk','status':'false'},
-    {'content':'drink','status':'false'}
+    {'content':'eat','status':false},
+    {'content':'walk','status':false},
+    {'content':'drink','status':false}
   ])
   return (
     <div>
         {/* Do not remove the main div */}
+        <h1>Parent Component</h1>
         <Child todos={todos} handleComplete = {handleComplete} />
     </div>
   )
 }
 
-export default App
+export default App;
